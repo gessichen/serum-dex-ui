@@ -1,6 +1,8 @@
 import { Button, Input, Radio, Switch, Slider } from 'antd';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl } from "react-intl";
+import { messages } from "../utils/lang";
 import {
   useBaseCurrencyBalances,
   useQuoteCurrencyBalances,
@@ -42,7 +44,7 @@ const sliderMarks = {
   100: '100%',
 };
 
-export default function TradeForm({ style, setChangeOrderRef }) {
+function TradeForm({ intl, style, setChangeOrderRef }) {
   const [side, setSide] = useState('buy');
   const { baseCurrency, quoteCurrency, market } = useMarket();
   const baseCurrencyBalances = useBaseCurrencyBalances();
@@ -172,7 +174,7 @@ export default function TradeForm({ style, setChangeOrderRef }) {
               borderColor: side === 'buy' ? '#02bf76' : '',
             }}
           >
-            BUY
+            <FormattedMessage {...messages.buy} />
           </Radio.Button>
           <Radio.Button
             value="sell"
@@ -183,20 +185,20 @@ export default function TradeForm({ style, setChangeOrderRef }) {
               borderColor: side === 'sell' ? '#F23B69' : '',
             }}
           >
-            SELL
+            <FormattedMessage {...messages.sell} />
           </Radio.Button>
         </Radio.Group>
         <InputBox
-          addonBefore={`Price (${quoteCurrency})`}
-          placeholder="Price"
+          addonBefore={`${intl.formatMessage(messages.price)} (${quoteCurrency})`}
+          placeholder={intl.formatMessage(messages.price)}
           value={price}
           type="number"
           step={market?.tickSize || 1}
           onChange={(e) => setPrice(e.target.value)}
         />
         <InputBox
-          addonBefore={`Size (${baseCurrency})`}
-          placeholder="Size"
+          addonBefore={`${intl.formatMessage(messages.size)} (${baseCurrency})`}
+          placeholder={intl.formatMessage(messages.size)}
           value={size}
           type="number"
           step={market?.minOrderSize || 1}
@@ -228,7 +230,7 @@ export default function TradeForm({ style, setChangeOrderRef }) {
           size="large"
           loading={submitting}
         >
-          Buy {baseCurrency}
+          {intl.formatMessage(messages.buy) + ' ' + baseCurrency}
         </BuyButton>
       ) : (
         <SellButton
@@ -239,9 +241,11 @@ export default function TradeForm({ style, setChangeOrderRef }) {
           size="large"
           loading={submitting}
         >
-          Sell {baseCurrency}
+          {intl.formatMessage(messages.sell) + ' ' + baseCurrency}
         </SellButton>
       )}
     </FloatingElement>
   );
 }
+
+export default injectIntl(TradeForm);

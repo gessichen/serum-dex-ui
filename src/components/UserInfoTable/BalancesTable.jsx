@@ -1,5 +1,7 @@
 import { Button } from 'antd';
 import React from 'react';
+import { FormattedMessage } from "react-intl";
+import { messages } from "../../utils/lang";
 import {
   useSelectedOpenOrdersAccount,
   useMarket,
@@ -32,22 +34,22 @@ export default function BalancesTable({ balances }) {
 
   const columns = [
     {
-      title: 'Coin',
+      title: <FormattedMessage {...messages.coin} />,
       dataIndex: 'coin',
       key: 'coin',
     },
     {
-      title: 'Wallet Balance',
+      title: <FormattedMessage {...messages.walletBalance} />,
       dataIndex: 'wallet',
       key: 'wallet',
     },
     {
-      title: 'Orders',
+      title: <FormattedMessage {...messages.order} />,
       dataIndex: 'orders',
       key: 'orders',
     },
     {
-      title: 'Unsettled',
+      title: <FormattedMessage {...messages.unsettled} />,
       dataIndex: 'unsettled',
       key: 'unsettled',
     },
@@ -56,7 +58,7 @@ export default function BalancesTable({ balances }) {
       render: () => (
         <div style={{ textAlign: 'right' }}>
           <Button ghost style={{ marginRight: 12 }} onClick={onSettleFunds}>
-            Settle
+            <FormattedMessage {...messages.settle} />
           </Button>
         </div>
       ),

@@ -7,8 +7,19 @@ import { GlobalStyle } from './global_style';
 import { Spin } from 'antd';
 import ErrorBoundary from './components/ErrorBoundary';
 import { Routes } from './routes';
+import { IntlProvider } from 'react-intl';
+import { LocaleContext } from './localeContext';
+import en from './translations/en';
+import zh from './translations/zh';
+
+const messages = {
+  en,
+  zh,
+};
 
 export default function App() {
+  const [locale] = React.useContext(LocaleContext);
+
   return (
     <Suspense fallback={() => <Spin size="large" />}>
       <GlobalStyle />
@@ -16,9 +27,11 @@ export default function App() {
         <ConnectionProvider>
           <MarketProvider>
             <WalletProvider>
-              <Suspense fallback={() => <Spin size="large" />}>
-                <Routes />
-              </Suspense>
+            <IntlProvider locale={locale} messages={messages[locale]}>
+                <Suspense fallback={() => <Spin size="large" />}>
+                  <Routes />
+                </Suspense>
+              </IntlProvider>
             </WalletProvider>
           </MarketProvider>
         </ConnectionProvider>

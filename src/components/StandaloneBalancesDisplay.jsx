@@ -2,6 +2,8 @@ import { Button, Col, Divider, Row } from 'antd';
 import React, { useState } from 'react';
 import FloatingElement from './layout/FloatingElement';
 import styled from 'styled-components';
+import { FormattedMessage } from "react-intl";
+import { messages } from "../utils/lang";
 import {
   useBalances,
   useMarket,
@@ -68,7 +70,7 @@ export default function StandaloneBalancesDisplay() {
             justify="space-between"
             style={{ paddingBottom: 12 }}
           >
-            <Col>Wallet balance:</Col>
+            <Col><FormattedMessage {...messages.walletBalance} />:</Col>
             <Col>{balances && balances.wallet}</Col>
           </RowBox>
           <RowBox
@@ -76,7 +78,7 @@ export default function StandaloneBalancesDisplay() {
             justify="space-between"
             style={{ paddingBottom: 12 }}
           >
-            <Col>Unsettled balance:</Col>
+            <Col><FormattedMessage {...messages.unsettledBalance} />:</Col>
             <Col>{balances && balances.unsettled}</Col>
           </RowBox>
           <RowBox align="middle" justify="space-around">
@@ -86,21 +88,21 @@ export default function StandaloneBalancesDisplay() {
                 size="large"
                 onClick={() => setDepositCoin(currency)}
               >
-                Deposit
+                <FormattedMessage {...messages.deposit} />
               </ActionButton>
             </Col>
             <Col style={{ width: 150 }}>
               <ActionButton block size="large" onClick={onSettleFunds}>
-                Settle
+              <FormattedMessage {...messages.settle} />
               </ActionButton>
             </Col>
           </RowBox>
           <Tip>
-            All deposits go to your{' '}
+            <FormattedMessage {...messages.depositTip} />{' '}
             <Link external to={providerUrl}>
               {providerName}
             </Link>{' '}
-            wallet
+            <FormattedMessage {...messages.wallet} />
           </Tip>
         </React.Fragment>
       ))}

@@ -1,6 +1,8 @@
 import BalancesTable from './BalancesTable';
 import OpenOrderTable from './OpenOrderTable';
 import React from 'react';
+import { FormattedMessage } from "react-intl";
+import { messages } from "../../utils/lang";
 import { Tabs, Typography } from 'antd';
 import FillsTable from './FillsTable';
 import FloatingElement from '../layout/FloatingElement';
@@ -21,13 +23,13 @@ export default function Index() {
       </Typography>
       <br />
       <Tabs defaultActiveKey="orders">
-        <TabPane tab="Open Orders" key="orders">
+        <TabPane tab={<FormattedMessage {...messages.openOrders} />} key="orders">
           <OpenOrdersTab />
         </TabPane>
-        <TabPane tab="Recent Trade History" key="fills">
+        <TabPane tab={<FormattedMessage {...messages.tradeHistory} />} key="fills">
           <FillsTable />
         </TabPane>
-        <TabPane tab="Balances" key="balances">
+        <TabPane tab={<FormattedMessage {...messages.balance} />} key="balances">
           <BalancesTab />
         </TabPane>
       </Tabs>

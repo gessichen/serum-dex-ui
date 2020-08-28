@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FormattedMessage } from "react-intl";
+import { messages } from "../../utils/lang";
 import { useMarket } from '../../utils/markets';
 import DataTable from '../layout/DataTable';
 
@@ -43,12 +45,12 @@ export default function OpenOrderTable({ openOrders }) {
 
   const columns = [
     {
-      title: 'Market',
+      title: <FormattedMessage {...messages.marketName} />,
       dataIndex: 'marketName',
       key: 'marketName',
     },
     {
-      title: 'Side',
+      title: <FormattedMessage {...messages.side} />,
       dataIndex: 'side',
       key: 'side',
       render: (side) => (
@@ -61,12 +63,12 @@ export default function OpenOrderTable({ openOrders }) {
       ),
     },
     {
-      title: 'Size',
+      title: <FormattedMessage {...messages.size} />,
       dataIndex: 'size',
       key: 'size',
     },
     {
-      title: 'Price',
+      title: <FormattedMessage {...messages.price} />,
       dataIndex: 'price',
       key: 'price',
     },
@@ -93,7 +95,7 @@ export default function OpenOrderTable({ openOrders }) {
     <Row>
       <Col span={24}>
         <DataTable
-          emptyLabel="No open orders"
+          emptyLabel={<FormattedMessage {...messages.noOrders} />}
           dataSource={dataSource}
           columns={columns}
           pagination={true}
