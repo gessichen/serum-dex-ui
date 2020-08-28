@@ -1,6 +1,8 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
+import { FormattedMessage } from "react-intl";
+import { messages } from "../utils/lang";
 import { useMarket, useTrades } from '../utils/markets';
 import { getDecimalCount } from '../utils/utils';
 import FloatingElement from './layout/FloatingElement';
@@ -36,13 +38,13 @@ export default function PublicTrades({ smallScreen }) {
             }
       }
     >
-      <Title>Recent Market trades</Title>
+      <Title><FormattedMessage {...messages.marketTrades} /></Title>
       <SizeTitle>
         <Col span={12} style={{ textAlign: 'left' }}>
-          Size ({baseCurrency})
+        <FormattedMessage {...messages.size} /> ({baseCurrency})
         </Col>
         <Col span={12} style={{ textAlign: 'right' }}>
-          Price ({quoteCurrency}){' '}
+          <FormattedMessage {...messages.price} /> ({quoteCurrency}){' '}
         </Col>
       </SizeTitle>
       {!!trades && (

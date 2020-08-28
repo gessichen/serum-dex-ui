@@ -2,11 +2,15 @@ import { InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Menu, Popover, Select } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import { LocaleContext } from '../localeContext';
+import { LAUGUANGES_PROVIDERS, messages } from '../utils/lang';
 import logo from '../assets/logo.svg';
 import styled from 'styled-components';
 import { useWallet, WALLET_PROVIDERS } from '../utils/wallet';
 import { ENDPOINTS, useConnectionConfig } from '../utils/connection';
 import LinkAddress from './LinkAddress';
+
 
 const Wrapper = styled.div`
   background-color: #0d1017;
@@ -52,6 +56,10 @@ export default function TopBar() {
     }
   }, [location]);
 
+  const [locale, setLocale] = React.useContext(LocaleContext);
+
+  const selectLang = (lang) => setLocale(lang);
+
   return (
     <Wrapper>
       <LogoWrapper>
@@ -84,9 +92,11 @@ export default function TopBar() {
             </Select.Option>
           ))}
         </Select>
-      </div>
-      <div>
-        <Select onSelect={setProvider} value={providerUrl}>
+        <Select
+          onSelect={setProvider}
+          value={providerUrl}
+          style={{ marginRight: 8 }}
+        >
           {WALLET_PROVIDERS.map(({ name, url }) => (
             <Select.Option value={url} key={url}>
               {name}
@@ -95,6 +105,13 @@ export default function TopBar() {
         </Select>
       </div>
       <div>
+        <Select onSelect={selectLang} value={locale}>
+          {LAUGUANGES_PROVIDERS.map(({ loc, label }) => (
+            <Select.Option value={loc} key={loc}>
+              {label}
+            </Select.Option>
+          ))}
+        </Select>
         <Button
           type="text"
           size="large"
@@ -102,7 +119,11 @@ export default function TopBar() {
           style={{ color: '#2abdd2' }}
         >
           <UserOutlined />
-          {!connected ? 'Connect wallet' : 'Disconnect'}
+          {!connected ? (
+            <FormattedMessage {...messages.connect} />
+          ) : (
+            <FormattedMessage {...messages.disConnect} />
+          )}
         </Button>
         {connected && (
           <Popover

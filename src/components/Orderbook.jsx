@@ -1,6 +1,8 @@
 import { Col, Row } from 'antd';
 import React, { useRef, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { FormattedMessage } from "react-intl";
+import { messages } from "../utils/lang";
 import { useMarket, useOrderbook, useMarkPrice } from '../utils/markets';
 import { isEqual, getDecimalCount } from '../utils/utils';
 import { useInterval } from '../utils/useInterval';
@@ -111,13 +113,13 @@ export default function Orderbook({ smallScreen, depth = 7, onPrice, onSize }) {
         smallScreen ? { flex: 1 } : { height: '500px', overflow: 'hidden' }
       }
     >
-      <Title>Orderbook</Title>
+      <Title><FormattedMessage {...messages.orderBook} /></Title>
       <SizeTitle>
         <Col span={12} style={{ textAlign: 'left' }}>
-          Size ({baseCurrency})
+        <FormattedMessage {...messages.size} /> ({baseCurrency})
         </Col>
         <Col span={12} style={{ textAlign: 'right' }}>
-          Price ({quoteCurrency})
+        <FormattedMessage {...messages.price} /> ({quoteCurrency})
         </Col>
       </SizeTitle>
       {orderbookData?.asks.map(({ price, size, sizePercent }) => (

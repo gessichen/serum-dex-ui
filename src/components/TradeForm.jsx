@@ -1,6 +1,8 @@
 import { Button, Input, Radio, Switch, Slider } from 'antd';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl } from "react-intl";
+import { messages } from "../utils/lang";
 import {
   useBaseCurrencyBalances,
   useQuoteCurrencyBalances,
@@ -41,7 +43,7 @@ const sliderMarks = {
   100: '100%',
 };
 
-export default function TradeForm({ style, setChangeOrderRef }) {
+function TradeForm({ intl, style, setChangeOrderRef }) {
   const [side, setSide] = useState('buy');
   const { baseCurrency, quoteCurrency, market } = useMarket();
   const baseCurrencyBalances = useBaseCurrencyBalances();
@@ -203,7 +205,7 @@ export default function TradeForm({ style, setChangeOrderRef }) {
               borderColor: side === 'buy' ? '#02bf76' : '',
             }}
           >
-            BUY
+            <FormattedMessage {...messages.buy} />
           </Radio.Button>
           <Radio.Button
             value="sell"
@@ -214,12 +216,12 @@ export default function TradeForm({ style, setChangeOrderRef }) {
               borderColor: side === 'sell' ? '#F23B69' : '',
             }}
           >
-            SELL
+            <FormattedMessage {...messages.sell} />
           </Radio.Button>
         </Radio.Group>
         <Input
           style={{ textAlign: 'right', paddingBottom: 8 }}
-          addonBefore={<div style={{ width: '30px' }}>Price</div>}
+          addonBefore={<div style={{ width: '30px' }}>{intl.formatMessage(messages.price)}</div>}
           suffix={
             <span style={{ fontSize: 10, opacity: 0.5 }}>{quoteCurrency}</span>
           }
@@ -231,7 +233,7 @@ export default function TradeForm({ style, setChangeOrderRef }) {
         <Input.Group compact style={{ paddingBottom: 8 }}>
           <Input
             style={{ width: 'calc(50% + 30px)', textAlign: 'right' }}
-            addonBefore={<div style={{ width: '30px' }}>Size</div>}
+            addonBefore={<div style={{ width: '30px' }}>{intl.formatMessage(messages.size)}</div>}
             suffix={
               <span style={{ fontSize: 10, opacity: 0.5 }}>{baseCurrency}</span>
             }
@@ -279,7 +281,7 @@ export default function TradeForm({ style, setChangeOrderRef }) {
           size="large"
           loading={submitting}
         >
-          Buy {baseCurrency}
+          {intl.formatMessage(messages.buy) + ' ' + baseCurrency}
         </BuyButton>
       ) : (
         <SellButton
@@ -290,9 +292,11 @@ export default function TradeForm({ style, setChangeOrderRef }) {
           size="large"
           loading={submitting}
         >
-          Sell {baseCurrency}
+          {intl.formatMessage(messages.sell) + ' ' + baseCurrency}
         </SellButton>
       )}
     </FloatingElement>
   );
 }
+
+export default injectIntl(TradeForm);
