@@ -58,7 +58,10 @@ export default function TopBar() {
 
   const [locale, setLocale] = React.useContext(LocaleContext);
 
-  const selectLang = (lang) => setLocale(lang);
+  const selectLang = (lang) => {
+    setLocale(lang);
+    localStorage.setItem('locale', lang);
+  };
 
   return (
     <Wrapper>

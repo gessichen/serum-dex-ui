@@ -11,10 +11,12 @@ import { IntlProvider } from 'react-intl';
 import { LocaleContext } from './localeContext';
 import en from './translations/en';
 import zh from './translations/zh';
+import ko from './translations/ko';
 
 const messages = {
   en,
   zh,
+  ko,
 };
 
 export default function App() {

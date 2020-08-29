@@ -9,6 +9,10 @@ export const LAUGUANGES_PROVIDERS = [
     loc: 'zh',
     label: '中文',
   },
+  {
+    loc: 'ko',
+    label: '한국어',
+  },
 ];
 
 export const messages = defineMessages({
