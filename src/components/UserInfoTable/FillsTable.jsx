@@ -54,7 +54,7 @@ function FillsTable({intl}) {
   const dataSource = (fills || []).map((fill) => ({
     ...fill,
     key: `${fill.orderId}${fill.side}`,
-    liquidity: fill.eventFlags.maker ? 'Maker' : 'Taker',
+    liquidity: fill.eventFlags.maker ? intl.formatMessage(messages.maker) : intl.formatMessage(messages.taker),
   }));
 
   return (

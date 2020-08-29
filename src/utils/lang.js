@@ -124,4 +124,12 @@ export const messages = defineMessages({
     id: 'noOrders',
     defaultMessage: 'No orders',
   },
+  maker: {
+    id: 'maker',
+    defaultMessage: 'Maker',
+  },
+  taker: {
+    id: 'taker',
+    defaultMessage: 'Taker',
+  },
 });
