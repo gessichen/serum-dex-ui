@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, Row, Col, Grid } from 'antd';
 import Link from './Link';
 import { helpUrls } from './HelpUrls';
+import { LocaleContext } from "../localeContext";
 const { Footer } = Layout;
 const { useBreakpoint } = Grid;
 
@@ -15,10 +16,22 @@ const footerElements = [
   { description: 'GitHub', link: helpUrls.github },
   { description: 'Project Serum', link: helpUrls.projectSerum },
   { description: 'Solana Network', link: helpUrls.solanaBeach },
+  { description: 'Tutorial', link: helpUrls.tutorial_en },
 ];
 
 export const CustomFooter = () => {
   const smallScreen = !useBreakpoint().lg;
+  const [locale] = React.useContext(LocaleContext);
+
+  const title = locale === 'zh' ? "教程" : "Tutorial";
+  const tlink = locale === 'zh' ? helpUrls.tutorial_zh : helpUrls.tutorial_en;
+
+  for(const ele of footerElements) {
+    if (ele.description === "Tutorial" || ele.description === "教程") {
+      ele.description = title;
+      ele.link = tlink;
+    }
+  }
 
   return (
     <Footer

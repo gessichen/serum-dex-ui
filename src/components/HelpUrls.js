@@ -8,4 +8,6 @@ export const helpUrls = {
   projectSerum: 'https://projectserum.com/',
   developerResources: 'https://projectserum.com/developer-resources',
   solanaBeach: 'https://solanabeach.io',
+  tutorial_zh: 'https://serum-academy.com/zh/serum-dex/sol-wallet/',
+  tutorial_en: 'https://serum-academy.com/en/serum-dex/sol-wallet/',
 };
