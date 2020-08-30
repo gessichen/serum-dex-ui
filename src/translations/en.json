@@ -14,6 +14,8 @@
   "Connect": "Connect",
   "balance": "Balance",
   "deposit": "DEPOSIT",
+  "fundTip1": "Make sure to go to Balances and click Settle to send out your funds",
+  "fundTip2": "To fund your wallet, use sollet.io. You can get SOL from FTX, Binance, BitMax, and others. You can get other tokens from FTX.",
   "noOrders": "No orders",
   "noTrades": "No Trades",
   "liquidity": "Liquidity",

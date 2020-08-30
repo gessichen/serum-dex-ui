@@ -14,10 +14,12 @@ export default function Index() {
   return (
     <FloatingElement style={{ flex: 1, paddingTop: 10 }}>
       <Typography>
+        <FormattedMessage {...messages.fundTip1} />
         Make sure to go to Balances and click Settle to send out your funds
       </Typography>
       <br />
       <Typography>
+        <FormattedMessage {...messages.fundTip2} />
         To fund your wallet, use sollet.io. You can get SOL from FTX, Binance,
         BitMax, and others. You can get other tokens from FTX.
       </Typography>

@@ -14,6 +14,8 @@
   "Connect": "链接钱包",
   "balance": "余额",
   "deposit": "充值",
+  "fundTip1": "请确保您在余额中点击结算来结算您的资金",
+  "fundTip2": "入金您的钱包，可以使用sollet.io. 您可以在FTX，Binance， BitMax 和其他交易所获得SOL, 再转到您sollet.io钱包中。您还可以在FTX上购得其它通证",
   "noOrders": "没有订单",
   "noTrades": "没有交易记录",
   "liquidity": "委托类型",
