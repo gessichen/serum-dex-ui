@@ -132,4 +132,14 @@ export const messages = defineMessages({
     id: 'taker',
     defaultMessage: 'Taker',
   },
+  fundTip1: {
+    id: 'fundTip1',
+    defaultMessage:
+      'Make sure to go to Balances and click Settle to send out your funds',
+  },
+  fundTip2: {
+    id: 'fundTip2',
+    defaultMessage:
+      'To fund your wallet, use sollet.io. You can get SOL from FTX, Binance, BitMax, and others. You can get other tokens from FTX.',
+  },
 });
