@@ -3,8 +3,40 @@ import { Layout, Row, Col, Grid } from 'antd';
 import Link from './Link';
 import { helpUrls } from './HelpUrls';
 import { LocaleContext } from "../localeContext";
+import logo from '../assets/serumqr.jpg';
+import styled from 'styled-components';
+
 const { Footer } = Layout;
 const { useBreakpoint } = Grid;
+
+const QrcodeWrapper = styled.div`
+  position: relative;
+  cursor: pointer;
+
+  img {
+    height: 30px;
+    margin-right: 8px;
+
+    position: absolute;
+    z-index: 99;
+    top: -135px;
+    right: -38px;
+    width: 7.5rem;
+    max-width: none;
+    height: 7.5rem;
+    transform: scale(0);
+    transform-origin: bottom;
+    opacity: 0;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+  }
+
+  &:hover img {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 const footerElements = [
   {
@@ -54,6 +86,12 @@ export const CustomFooter = () => {
                 </Col>
               );
             })}
+            <Col key={"wechat"}>
+                <QrcodeWrapper>
+                  <img src={logo} alt="" />
+                  <a href="/">Wechat</a>
+                </QrcodeWrapper>
+            </Col>
           </>
         )}
         <Col flex="auto">{/*  <DexProgramSelector />*/}</Col>
