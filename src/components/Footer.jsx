@@ -55,6 +55,8 @@ export const CustomFooter = () => {
   const smallScreen = !useBreakpoint().lg;
   const [locale] = React.useContext(LocaleContext);
 
+  const dtitle = locale === 'zh' ? "Serum开发者资源" : "Serum Developer Resources";
+
   const title = locale === 'zh' ? "教程" : "Tutorial";
   const tlink = locale === 'zh' ? helpUrls.tutorial_zh : helpUrls.tutorial_en;
 
@@ -62,6 +64,10 @@ export const CustomFooter = () => {
     if (ele.description === "Tutorial" || ele.description === "教程") {
       ele.description = title;
       ele.link = tlink;
+    }
+
+    if (ele.description === "Serum开发者资源" || ele.description === "Serum Developer Resources") {
+      ele.description = dtitle;
     }
   }
 
