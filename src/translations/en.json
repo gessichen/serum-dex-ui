@@ -28,5 +28,6 @@
   "marketTrades": "Market trades",
   "noOpenOrders": "No open orders",
   "tradeHistory": "Trade history",
-  "walletBalance": "wallet balance"
+  "walletBalance": "wallet balance",
+  "unsettledBalance": "Unsettled Balance"
 }

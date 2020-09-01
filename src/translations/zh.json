@@ -28,5 +28,6 @@
   "marketTrades": "最新成交",
   "noOpenOrders": "没有委托订单",
   "tradeHistory": "交易记录",
-  "walletBalance": "钱包余额"
+  "walletBalance": "钱包余额",
+  "unsettledBalance": "未结算资金"
 }
