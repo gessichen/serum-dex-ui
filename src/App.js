@@ -14,13 +14,19 @@ import zh from './translations/zh';
 import ko from './translations/ko';
 import jp from './translations/jp';
 import vi from './translations/vi';
+import tr from './translations/tr';
+import ru from './translations/ru';
+import zhhk from './translations/zhhk';
 
 const messages = {
   en,
-  zh,
+  'zh-CN': zh,
   ko,
   jp,
   vi,
+  tr,
+  ru,
+  'zh-HK': zhhk,
 };
 
 export default function App() {

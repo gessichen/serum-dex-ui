@@ -3,9 +3,14 @@ import React from 'react';
 export const LocaleContext = React.createContext();
 
 export const LocaleContextProvider = (props) => {
-  const loc = localStorage.getItem('locale')
+  let loc = localStorage.getItem('locale')
     ? localStorage.getItem('locale')
     : 'en';
+
+  if (loc === 'zh') {
+    loc = 'zh-CN';
+  }
+
   const [locale, setLocale] = React.useState(loc);
 
   return (
