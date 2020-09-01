@@ -12,11 +12,15 @@ import { LocaleContext } from './localeContext';
 import en from './translations/en';
 import zh from './translations/zh';
 import ko from './translations/ko';
+import jp from './translations/jp';
+import vi from './translations/vi';
 
 const messages = {
   en,
   zh,
   ko,
+  jp,
+  vi,
 };
 
 export default function App() {
@@ -29,7 +33,7 @@ export default function App() {
         <ConnectionProvider>
           <MarketProvider>
             <WalletProvider>
-            <IntlProvider locale={locale} messages={messages[locale]}>
+              <IntlProvider locale={locale} messages={messages[locale]}>
                 <Suspense fallback={() => <Spin size="large" />}>
                   <Routes />
                 </Suspense>

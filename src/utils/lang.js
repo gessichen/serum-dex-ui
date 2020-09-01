@@ -13,6 +13,14 @@ export const LAUGUANGES_PROVIDERS = [
     loc: 'ko',
     label: '한국어',
   },
+  {
+    loc: 'jp',
+    label: '日本語',
+  },
+  {
+    loc: 'vi',
+    label: 'Tiếng Việt',
+  },
 ];
 
 export const messages = defineMessages({
@@ -78,7 +86,7 @@ export const messages = defineMessages({
   },
   depositTip: {
     id: 'depositTip',
-    defaultMessage: 'All deposits go to your {provider} wallet',
+    defaultMessage: 'All deposits go to your ',
   },
   noOpenOrders: {
     id: 'noOpenOrders',
@@ -141,5 +149,9 @@ export const messages = defineMessages({
     id: 'fundTip2',
     defaultMessage:
       'To fund your wallet, use sollet.io. You can get SOL from FTX, Binance, BitMax, and others. You can get other tokens from FTX.',
+  },
+  trade: {
+    id: 'trade',
+    defaultMessage: 'Trade',
   },
 });
