@@ -6,8 +6,16 @@ export const LAUGUANGES_PROVIDERS = [
     label: 'English',
   },
   {
-    loc: 'zh',
-    label: '中文',
+    loc: 'zh-CN',
+    label: '简体中文',
+  },
+  {
+    loc: 'zh-HK',
+    label: '繁体中文',
+  },
+  {
+    loc: 'ru',
+    label: 'ру́сский язы́к',
   },
   {
     loc: 'ko',
@@ -20,6 +28,10 @@ export const LAUGUANGES_PROVIDERS = [
   {
     loc: 'vi',
     label: 'Tiếng Việt',
+  },
+  {
+    loc: 'tr',
+    label: 'Türkçe',
   },
 ];
 
