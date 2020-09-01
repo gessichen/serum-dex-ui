@@ -11,7 +11,6 @@ import { useWallet, WALLET_PROVIDERS } from '../utils/wallet';
 import { ENDPOINTS, useConnectionConfig } from '../utils/connection';
 import LinkAddress from './LinkAddress';
 
-
 const Wrapper = styled.div`
   background-color: #0d1017;
   display: flex;
@@ -81,7 +80,9 @@ export default function TopBar() {
           flex: 1,
         }}
       >
-        <Menu.Item key="/">TRADE</Menu.Item>
+        <Menu.Item key="/">
+          <FormattedMessage {...messages.trade} />
+        </Menu.Item>
       </Menu>
       <div>
         <Select

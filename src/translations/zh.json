@@ -1,5 +1,5 @@
 {
-  "buy": "买 ",
+  "buy": "买",
   "coin": "币种",
   "fees": "费用",
   "sell": "卖 ",
@@ -9,6 +9,7 @@
   "order": "订单",
   "price": "价格",
   "taker": "吃单",
+  "trade": "交易",
   "settle": "结算",
   "wallet": "钱包",
   "Connect": "链接钱包",
@@ -21,7 +22,7 @@
   "liquidity": "委托类型",
   "orderBook": "委托挂单",
   "unsettled": "未结算",
-  "depositTip": "所有的充值都会进入你的 {provider} 钱包",
+  "depositTip": "所有的充值都会进入你的",
   "disConnect": "断开链接",
   "marketName": "市场",
   "openOrders": "当前委托",
