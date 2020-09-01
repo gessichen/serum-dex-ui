@@ -28,5 +28,6 @@
   "marketTrades": "시장 거래",
   "noOpenOrders": "미체결 주문이 없습니다.",
   "tradeHistory": "거래 내역",
-  "walletBalance": "잔액"
+  "walletBalance": "잔액",
+  "unsettledBalance": "미결제 자금"
 }
