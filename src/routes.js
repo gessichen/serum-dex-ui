@@ -43,16 +43,8 @@ function BalancesPageContents() {
 
 function MainPageContents() {
   return (
-    <React.Fragment>
-      <Layout
-        style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}
-      >
-        <Header style={{ padding: 0 }}>
-          <TopBar />
-        </Header>
-        <MainPage />
-        <CustomFooter />
-      </Layout>
-    </React.Fragment>
+    <BasicLayout>
+      <MainPage />
+    </BasicLayout>
   );
 }
