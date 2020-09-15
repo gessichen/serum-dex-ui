@@ -1,4 +1,9 @@
-import { InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  InfoCircleOutlined,
+  UserOutlined,
+  SoundOutlined,
+  RightOutlined,
+} from '@ant-design/icons';
 import { Button, Menu, Popover, Select } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -84,6 +89,7 @@ export default function TopBar() {
           <FormattedMessage {...messages.trade} />
         </Menu.Item>
       </Menu>
+
       <div>
         <Select
           onSelect={setEndpoint}

@@ -10,6 +10,7 @@ export function Routes() {
   return (
     <HashRouter basename={'/'}>
       <Route exact path="/" component={TradePageContents} />
+      <Route exact path="/news" component={MainPageContents} />
       <Route exact path="/trade" component={TradePageContents} />
       <Route exact path="/orders" component={OpenOrdersPageContents} />
       <Route exact path="/balances" component={BalancesPageContents} />
