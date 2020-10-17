@@ -13,6 +13,7 @@ import { LAUGUANGES_PROVIDERS, messages } from '../utils/lang';
 import logo from '../assets/logo.svg';
 import styled from 'styled-components';
 import { useWallet, WALLET_PROVIDERS } from '../utils/wallet';
+import { useSolong } from '../utils/solong-helper';
 import { ENDPOINTS, useConnectionConfig } from '../utils/connection';
 import LinkAddress from './LinkAddress';
 
@@ -38,12 +39,13 @@ const LogoWrapper = styled.div`
 
 export default function TopBar() {
   const [current, setCurrent] = useState('/');
-  const { connected, wallet, providerUrl, setProvider } = useWallet();
+  //const { connected, wallet, providerUrl, setProvider } = useWallet();
+  const { connected, solong, account } = useSolong();
   const { endpoint, setEndpoint } = useConnectionConfig();
   const location = useLocation();
   const history = useHistory();
 
-  const publicKey = wallet?.publicKey?.toBase58();
+  const publicKey = account; // wallet?.publicKey?.toBase58();
 
   const handleClick = useCallback(
     (e) => {
@@ -102,17 +104,6 @@ export default function TopBar() {
             </Select.Option>
           ))}
         </Select>
-        <Select
-          onSelect={setProvider}
-          value={providerUrl}
-          style={{ marginRight: 8 }}
-        >
-          {WALLET_PROVIDERS.map(({ name, url }) => (
-            <Select.Option value={url} key={url}>
-              {name}
-            </Select.Option>
-          ))}
-        </Select>
       </div>
       <div>
         <Select onSelect={selectLang} value={locale}>
@@ -125,14 +116,14 @@ export default function TopBar() {
         <Button
           type="text"
           size="large"
-          onClick={connected ? wallet.disconnect : wallet.connect}
+          onClick={solong.selectAccount}
           style={{ color: '#2abdd2' }}
         >
           <UserOutlined />
           {!connected ? (
             <FormattedMessage {...messages.connect} />
           ) : (
-            <FormattedMessage {...messages.disConnect} />
+            <FormattedMessage {...account} />
           )}
         </Button>
         {connected && (

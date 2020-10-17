@@ -3,6 +3,7 @@ import './App.less';
 import { ConnectionProvider } from './utils/connection';
 import { MarketProvider } from './utils/markets';
 import { WalletProvider } from './utils/wallet';
+import { SolongProvider } from './utils/solong-helper';
 import { GlobalStyle } from './global_style';
 import { Spin } from 'antd';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -39,11 +40,13 @@ export default function App() {
         <ConnectionProvider>
           <MarketProvider>
             <WalletProvider>
-              <IntlProvider locale={locale} messages={messages[locale]}>
-                <Suspense fallback={() => <Spin size="large" />}>
-                  <Routes />
-                </Suspense>
-              </IntlProvider>
+              <SolongProvider>
+                <IntlProvider locale={locale} messages={messages[locale]}>
+                  <Suspense fallback={() => <Spin size="large" />}>
+                    <Routes />
+                  </Suspense>
+                </IntlProvider>
+              </SolongProvider>
             </WalletProvider>
           </MarketProvider>
         </ConnectionProvider>
