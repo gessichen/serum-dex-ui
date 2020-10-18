@@ -88,6 +88,8 @@ export async function getTokenAccountInfo(connection, ownerAddress) {
     getOwnedTokenAccounts(connection, ownerAddress),
     connection.getAccountInfo(ownerAddress),
   ]);
+
+  console.log('spl:', splAccounts, ' account:', account);
   const parsedSplAccounts = splAccounts.map(({ publicKey, accountInfo }) => {
     return {
       pubkey: publicKey,

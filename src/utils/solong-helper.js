@@ -2,12 +2,21 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { getSelectedTokenAccountForMint } from './markets';
 import { notify } from './notifications';
 import { useLocalStorageState } from './utils';
+import { PublicKey } from '@solana/web3.js';
 
 const SolongContext = React.createContext(null);
 
 export class SolongHelper {
   constructor() {
+    console.log('SolongHelper');
     this.onSelected = null;
+    this._publicKey = null;
+
+    this.selectAccount = this.selectAccount.bind(this);
+  }
+
+  get publicKey() {
+    return this._publicKey;
   }
 
   selectAccount = () => {
@@ -15,7 +24,8 @@ export class SolongHelper {
     window.solong
       .selectAccount()
       .then((account) => {
-        console.log('window solong select:', account);
+        this._publicKey = new PublicKey(account);
+        console.log('window solong select:', account, 'this:', this);
         if (this.onSelected) {
           this.onSelected(account);
         }
@@ -25,16 +35,15 @@ export class SolongHelper {
 }
 
 export function SolongProvider({ children }) {
-  const solong = new SolongHelper();
+  //const solong = new SolongHelper();
+  const solong = useMemo(() => new SolongHelper(), []);
 
   const [connected, setConnected] = useState(false);
-  const [account, setAccount] = useState(null);
   useEffect(() => {
     console.log('trying to connect');
-    solong.onSelected = (account) => {
-      console.log('helper on select :', account);
+    solong.onSelected = (pubKey) => {
+      console.log('helper on select :', pubKey);
       setConnected(true);
-      setAccount(account);
     };
   }, [solong]);
   return (
@@ -42,7 +51,7 @@ export function SolongProvider({ children }) {
       value={{
         solong,
         connected,
-        account,
+        wallet: solong,
       }}
     >
       {children}
@@ -55,6 +64,6 @@ export function useSolong() {
   return {
     connected: context.connected,
     solong: context.solong,
-    account: context.account,
+    wallet: context.solong,
   };
 }

@@ -40,12 +40,13 @@ const LogoWrapper = styled.div`
 export default function TopBar() {
   const [current, setCurrent] = useState('/');
   //const { connected, wallet, providerUrl, setProvider } = useWallet();
-  const { connected, solong, account } = useSolong();
+  const { connected, wallet } = useSolong();
   const { endpoint, setEndpoint } = useConnectionConfig();
   const location = useLocation();
   const history = useHistory();
 
-  const publicKey = account; // wallet?.publicKey?.toBase58();
+  console.log('wallet:', wallet);
+  const publicKey = wallet?.publicKey?.toBase58();
 
   const handleClick = useCallback(
     (e) => {
@@ -116,7 +117,7 @@ export default function TopBar() {
         <Button
           type="text"
           size="large"
-          onClick={solong.selectAccount}
+          onClick={wallet.selectAccount}
           style={{ color: '#2abdd2' }}
         >
           <UserOutlined />

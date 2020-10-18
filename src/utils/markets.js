@@ -17,6 +17,7 @@ import tuple from 'immutable-tuple';
 import { notify } from './notifications';
 import { BN } from 'bn.js';
 import { getTokenAccountInfo } from './tokens';
+import { useSolong } from './solong-helper';
 
 // Used in debugging, should be false in production
 const _IGNORE_DEPRECATED = false;
@@ -358,7 +359,10 @@ export function useSelectedOpenOrdersAccount(fast = false) {
 }
 
 export function useTokenAccounts() {
-  const { connected, wallet } = useWallet();
+  //const { connected, wallet } = useWallet();
+  const { connected, wallet } = useSolong();
+  //console.log("wallet :", wallet)
+
   const connection = useConnection();
   async function getTokenAccounts() {
     if (!connected) {
@@ -391,6 +395,7 @@ export function useSelectedQuoteCurrencyAccount() {
 
 export function useSelectedBaseCurrencyAccount() {
   const [accounts] = useTokenAccounts();
+  //console.log("accounts:", accounts)
   const { market } = useMarket();
   return getSelectedTokenAccountForMint(accounts, market?.baseMintAddress);
 }
@@ -662,7 +667,9 @@ export function useBalances() {
 }
 
 export function useWalletBalancesForAllMarkets() {
-  const { connected, wallet } = useWallet();
+  //const { connected, wallet } = useWallet();
+  console.log('useWalletBalances');
+  const { connected, solong } = useSolong();
 
   const connection = useConnection();
   const allMarkets = useAllMarkets();
@@ -684,7 +691,8 @@ export function useWalletBalancesForAllMarkets() {
         const baseBalance = await getCurrencyBalance(
           market,
           connection,
-          wallet,
+          //wallet,
+          solong,
           true,
         );
         balances.push({
@@ -699,7 +707,8 @@ export function useWalletBalancesForAllMarkets() {
         const quoteBalance = await getCurrencyBalance(
           market,
           connection,
-          wallet,
+          //wallet,
+          solong,
           false,
         );
         balances.push({
@@ -719,7 +728,8 @@ export function useWalletBalancesForAllMarkets() {
       'getWalletBalancesForAllMarkets',
       connected,
       connection,
-      wallet,
+      //wallet,
+      solong,
       allMarkets,
     ),
     { refreshInterval: _SLOW_REFRESH_INTERVAL },
@@ -734,11 +744,13 @@ async function getCurrencyBalance(market, connection, wallet, base = true) {
   const tokenAccountBalances = await connection.getTokenAccountBalance(
     currencyAccount.pubkey,
   );
+  console.log('account:', wallet.publicKey, ' : ', tokenAccountBalances);
   return tokenAccountBalances?.value?.uiAmount;
 }
 
 export function useOpenOrderAccountBalancesForAllMarkets() {
-  const { connected, wallet } = useWallet();
+  //const { connected, wallet } = useWallet();
+  const { connected, wallet } = useSolong();
 
   const connection = useConnection();
   const allMarkets = useAllMarkets();
@@ -899,7 +911,8 @@ export function useUnmigratedDeprecatedMarkets() {
 }
 
 export function useGetOpenOrdersForDeprecatedMarkets() {
-  const { connected, wallet } = useWallet();
+  //const { connected, wallet } = useWallet();
+  const { connected, wallet } = useSolong();
   const [customMarkets] = useLocalStorageState('customMarkets', []);
   const connection = useConnection();
   const marketsAndOrders = useUnmigratedDeprecatedMarkets();

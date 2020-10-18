@@ -2,8 +2,8 @@ import { Button, Col, Divider, Row } from 'antd';
 import React, { useState } from 'react';
 import FloatingElement from './layout/FloatingElement';
 import styled from 'styled-components';
-import { FormattedMessage } from "react-intl";
-import { messages } from "../utils/lang";
+import { FormattedMessage } from 'react-intl';
+import { messages } from '../utils/lang';
 import {
   useBalances,
   useMarket,
@@ -13,6 +13,7 @@ import {
 } from '../utils/markets';
 import DepositDialog from './DepositDialog';
 import { useWallet } from '../utils/wallet';
+import { useSolong } from '../utils/solong-helper';
 import Link from './Link';
 import { settleFunds } from '../utils/send';
 import { useSendConnection } from '../utils/connection';
@@ -35,9 +36,11 @@ const ActionButton = styled(Button)`
 export default function StandaloneBalancesDisplay() {
   const { baseCurrency, quoteCurrency, market } = useMarket();
   const balances = useBalances();
+  console.log('balance:', balances);
   const openOrdersAccount = useSelectedOpenOrdersAccount(true);
   const connection = useSendConnection();
   const { providerUrl, providerName, wallet } = useWallet();
+  const { solong } = useSolong;
   const [baseOrQuote, setBaseOrQuote] = useState('');
   const baseCurrencyAccount = useSelectedBaseCurrencyAccount();
   const quoteCurrencyAccount = useSelectedQuoteCurrencyAccount();
@@ -70,7 +73,9 @@ export default function StandaloneBalancesDisplay() {
             justify="space-between"
             style={{ paddingBottom: 12 }}
           >
-            <Col><FormattedMessage {...messages.walletBalance} />:</Col>
+            <Col>
+              <FormattedMessage {...messages.walletBalance} />:
+            </Col>
             <Col>{balances && balances.wallet}</Col>
           </RowBox>
           <RowBox
@@ -78,7 +83,9 @@ export default function StandaloneBalancesDisplay() {
             justify="space-between"
             style={{ paddingBottom: 12 }}
           >
-            <Col><FormattedMessage {...messages.unsettledBalance} />:</Col>
+            <Col>
+              <FormattedMessage {...messages.unsettledBalance} />:
+            </Col>
             <Col>{balances && balances.unsettled}</Col>
           </RowBox>
           <RowBox align="middle" justify="space-around">
@@ -93,7 +100,7 @@ export default function StandaloneBalancesDisplay() {
             </Col>
             <Col style={{ width: 150 }}>
               <ActionButton block size="large" onClick={onSettleFunds}>
-              <FormattedMessage {...messages.settle} />
+                <FormattedMessage {...messages.settle} />
               </ActionButton>
             </Col>
           </RowBox>

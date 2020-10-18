@@ -11,6 +11,7 @@ import AccountsTable from '../components/UserInfoTable/AccountsTable';
 const { TabPane } = Tabs;
 
 export default function BalancesPage() {
+  console.log('Balance Page');
   const [
     walletBalances,
     loadedWalletBalances,
