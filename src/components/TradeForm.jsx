@@ -1,8 +1,8 @@
 import { Button, Input, Radio, Switch, Slider } from 'antd';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { FormattedMessage, injectIntl } from "react-intl";
-import { messages } from "../utils/lang";
+import { FormattedMessage, injectIntl } from 'react-intl';
+import { messages } from '../utils/lang';
 import {
   useBaseCurrencyBalances,
   useQuoteCurrencyBalances,
@@ -13,6 +13,7 @@ import {
   useSelectedQuoteCurrencyAccount,
 } from '../utils/markets';
 import { useWallet } from '../utils/wallet';
+import { useSolong } from '../utils/solong-helper';
 import { notify } from '../utils/notifications';
 import {
   getDecimalCount,
@@ -51,7 +52,8 @@ function TradeForm({ intl, style, setChangeOrderRef }) {
   const baseCurrencyAccount = useSelectedBaseCurrencyAccount();
   const quoteCurrencyAccount = useSelectedQuoteCurrencyAccount();
   const openOrdersAccount = useSelectedOpenOrdersAccount(true);
-  const { wallet } = useWallet();
+  //const { wallet } = useWallet();
+  const { wallet } = useSolong();
   const sendConnection = useSendConnection();
   const markPrice = useMarkPrice();
 
@@ -221,7 +223,11 @@ function TradeForm({ intl, style, setChangeOrderRef }) {
         </Radio.Group>
         <Input
           style={{ textAlign: 'right', paddingBottom: 8 }}
-          addonBefore={<div style={{ width: '30px' }}>{intl.formatMessage(messages.price)}</div>}
+          addonBefore={
+            <div style={{ width: '30px' }}>
+              {intl.formatMessage(messages.price)}
+            </div>
+          }
           suffix={
             <span style={{ fontSize: 10, opacity: 0.5 }}>{quoteCurrency}</span>
           }
@@ -233,7 +239,11 @@ function TradeForm({ intl, style, setChangeOrderRef }) {
         <Input.Group compact style={{ paddingBottom: 8 }}>
           <Input
             style={{ width: 'calc(50% + 30px)', textAlign: 'right' }}
-            addonBefore={<div style={{ width: '30px' }}>{intl.formatMessage(messages.size)}</div>}
+            addonBefore={
+              <div style={{ width: '30px' }}>
+                {intl.formatMessage(messages.size)}
+              </div>
+            }
             suffix={
               <span style={{ fontSize: 10, opacity: 0.5 }}>{baseCurrency}</span>
             }

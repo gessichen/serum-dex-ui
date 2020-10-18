@@ -368,6 +368,7 @@ async function sendTransaction({
     await connection.getRecentBlockhash('max')
   ).blockhash;
   transaction.signPartial(...signers);
+  console.log('transaction:', transaction);
   const rawTransaction = (
     await wallet.signTransaction(transaction)
   ).serialize();

@@ -66,7 +66,8 @@ export function useAllMarkets() {
 
 export function useUnmigratedOpenOrdersAccounts() {
   const connection = useConnection();
-  const { wallet } = useWallet();
+  //const { wallet } = useWallet();
+  const { wallet } = useSolong();
 
   async function getUnmigratedOpenOrdersAccounts() {
     if (!wallet || !connection || !wallet.publicKey) {
@@ -329,7 +330,8 @@ export function useOrderbook(depth = 20) {
 // TODO: Update to use websocket
 export function useOpenOrdersAccounts(fast = false) {
   const { market } = useMarket();
-  const { connected, wallet } = useWallet();
+  //const { connected, wallet } = useWallet();
+  const { connected, wallet } = useSolong();
   const connection = useConnection();
   async function getOpenOrdersAccounts() {
     if (!connected) {
@@ -460,7 +462,8 @@ export function useTrades(limit = 100) {
 
 export function useFeeDiscountKeys() {
   const { market } = useMarket();
-  const { connected, wallet } = useWallet();
+  //const { connected, wallet } = useWallet();
+  const { connected, wallet } = useSolong();
   const connection = useConnection();
   async function getFeeDiscountKeys() {
     if (!connected) {
@@ -499,7 +502,8 @@ export function useFills(limit = 100) {
 
 // TODO: Update to use websocket
 export function useFillsForAllMarkets(limit = 100) {
-  const { connected, wallet } = useWallet();
+  //const { connected, wallet } = useWallet();
+  const { connected, wallet } = useSolong();
 
   const connection = useConnection();
   const allMarkets = useAllMarkets();
@@ -556,7 +560,8 @@ export function useFillsForAllMarkets(limit = 100) {
 
 // TODO: Update to use websocket
 export function useOpenOrdersForAllMarkets() {
-  const { connected, wallet } = useWallet();
+  //const { connected, wallet } = useWallet();
+  const { connected, wallet } = useSolong();
 
   const connection = useConnection();
   const allMarkets = useAllMarkets();

@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React from 'react';
-import { FormattedMessage } from "react-intl";
-import { messages } from "../../utils/lang";
+import { FormattedMessage } from 'react-intl';
+import { messages } from '../../utils/lang';
 import {
   useTokenAccounts,
   getSelectedTokenAccountForMint,
@@ -9,6 +9,7 @@ import {
 import DataTable from '../layout/DataTable';
 import { useSendConnection } from '../../utils/connection';
 import { useWallet } from '../../utils/wallet';
+import { useSolong } from '../../utils/solong-helper';
 import { settleFunds } from '../../utils/send';
 
 export default function BalancesTable({
@@ -19,7 +20,8 @@ export default function BalancesTable({
 }) {
   const [accounts] = useTokenAccounts();
   const connection = useSendConnection();
-  const { wallet } = useWallet();
+  //const { wallet } = useWallet();
+  const { wallet } = useSolong();
 
   async function onSettleFunds(market, openOrders) {
     return await settleFunds({

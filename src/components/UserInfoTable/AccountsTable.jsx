@@ -4,10 +4,12 @@ import DataTable from '../layout/DataTable';
 import { useConnection } from '../../utils/connection';
 import { useWallet } from '../../utils/wallet';
 import { settleFunds } from '../../utils/send';
+import { useSolong } from '../../utils/solong-helper';
 
 export default function AccountsTable({ accountBalances }) {
   const connection = useConnection();
-  const { wallet } = useWallet();
+  //const { wallet } = useWallet();
+  const { wallet } = useSolong();
 
   async function onSettleFunds(account) {
     const {

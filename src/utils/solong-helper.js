@@ -19,7 +19,11 @@ export class SolongHelper {
     return this._publicKey;
   }
 
-  selectAccount = () => {
+  async signTransaction(transaction) {
+    return window.solong.signTransaction(transaction);
+  }
+
+  selectAccount() {
     console.log('solong helper select account');
     window.solong
       .selectAccount()
@@ -31,7 +35,7 @@ export class SolongHelper {
         }
       })
       .catch(() => {});
-  };
+  }
 }
 
 export function SolongProvider({ children }) {

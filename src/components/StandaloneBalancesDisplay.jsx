@@ -36,11 +36,10 @@ const ActionButton = styled(Button)`
 export default function StandaloneBalancesDisplay() {
   const { baseCurrency, quoteCurrency, market } = useMarket();
   const balances = useBalances();
-  console.log('balance:', balances);
   const openOrdersAccount = useSelectedOpenOrdersAccount(true);
   const connection = useSendConnection();
-  const { providerUrl, providerName, wallet } = useWallet();
-  const { solong } = useSolong;
+  const { providerUrl, providerName } = useWallet();
+  const { wallet } = useSolong;
   const [baseOrQuote, setBaseOrQuote] = useState('');
   const baseCurrencyAccount = useSelectedBaseCurrencyAccount();
   const quoteCurrencyAccount = useSelectedQuoteCurrencyAccount();
