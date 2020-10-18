@@ -123,7 +123,7 @@ export default function TopBar() {
           {!connected ? (
             <FormattedMessage {...messages.connect} />
           ) : (
-            <FormattedMessage {...account} />
+            <FormattedMessage {...messages.disConnect} />
           )}
         </Button>
         {connected && (
