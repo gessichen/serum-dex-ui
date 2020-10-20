@@ -39,7 +39,7 @@ export default function StandaloneBalancesDisplay() {
   const openOrdersAccount = useSelectedOpenOrdersAccount(true);
   const connection = useSendConnection();
   const { providerUrl, providerName } = useWallet();
-  const { wallet } = useSolong;
+  const { wallet } = useSolong();
   const [baseOrQuote, setBaseOrQuote] = useState('');
   const baseCurrencyAccount = useSelectedBaseCurrencyAccount();
   const quoteCurrencyAccount = useSelectedQuoteCurrencyAccount();
