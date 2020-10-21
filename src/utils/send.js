@@ -314,7 +314,13 @@ export async function placeOrder({
   transaction.add(market.makeMatchOrdersTransaction(5));
 
   const onConfirm = (result) => {
-    if (result.timeout) {
+    if (result.canceled) {
+      notify({
+        message: 'Reject',
+        type: 'error',
+        description: 'Reject sign transaction',
+      });
+    } else if (result.timeout) {
       notify({
         message: 'Timed out',
         type: 'error',
@@ -369,9 +375,16 @@ async function sendTransaction({
   ).blockhash;
   transaction.signPartial(...signers);
   console.log('transaction:', transaction);
-  const rawTransaction = (
-    await wallet.signTransaction(transaction)
-  ).serialize();
+  const signedTransaction = await wallet
+    .signTransaction(transaction)
+    .catch(() => {
+      onConfirm({ canceled: true });
+      return null;
+    });
+  if (!signedTransaction) {
+    return null;
+  }
+  const rawTransaction = signedTransaction.serialize();
   let done = false;
   const startTime = getUnixTs();
   onBeforeSend();

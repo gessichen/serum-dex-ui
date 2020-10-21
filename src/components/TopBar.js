@@ -114,19 +114,21 @@ export default function TopBar() {
             </Select.Option>
           ))}
         </Select>
-        <Button
-          type="text"
-          size="large"
-          onClick={wallet.selectAccount}
-          style={{ color: '#2abdd2' }}
-        >
-          <UserOutlined />
-          {!connected ? (
-            <FormattedMessage {...messages.connect} />
-          ) : (
-            <FormattedMessage {...messages.disConnect} />
-          )}
-        </Button>
+        {!connected && (
+          <Button
+            type="text"
+            size="large"
+            onClick={wallet.selectAccount}
+            style={{ color: '#2abdd2' }}
+          >
+            <UserOutlined />
+            {!connected ? (
+              <FormattedMessage {...messages.connect} />
+            ) : (
+              <FormattedMessage {...messages.disConnect} />
+            )}
+          </Button>
+        )}
         {connected && (
           <Popover
             content={<LinkAddress address={publicKey} />}
@@ -134,7 +136,10 @@ export default function TopBar() {
             title="Wallet public key"
             trigger="click"
           >
-            <InfoCircleOutlined style={{ color: '#2abdd2' }} />
+            <UserOutlined
+              size="large"
+              style={{ color: '#2abdd2', marginLeft: '1rem' }}
+            />
           </Popover>
         )}
       </div>
