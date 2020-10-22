@@ -30,6 +30,12 @@ export class SolongHelper {
       .then((account) => {
         this._publicKey = new PublicKey(account);
         console.log('window solong select:', account, 'this:', this);
+
+        notify({
+          message: `Account ${account} connected`,
+          type: 'success',
+        });
+
         if (this.onSelected) {
           this.onSelected(account);
         }
