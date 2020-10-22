@@ -122,7 +122,13 @@ export async function settleFunds({
     : settleFundsSigners;
 
   const onConfirm = (result) => {
-    if (result.timeout) {
+    if (result.canceled) {
+      notify({
+        message: 'Reject',
+        type: 'error',
+        description: 'Reject sign transaction',
+      });
+    } else if (result.timeout) {
       notify({
         message: 'Timed out',
         type: 'error',
@@ -171,7 +177,13 @@ export async function cancelOrders({
   });
   transaction.add(market.makeMatchOrdersTransaction(5));
   const onConfirm = (result) => {
-    if (result.timeout) {
+    if (result.canceled) {
+      notify({
+        message: 'Reject',
+        type: 'error',
+        description: 'Reject sign transaction',
+      });
+    } else if (result.timeout) {
       notify({
         message: 'Timed out',
         type: 'error',
