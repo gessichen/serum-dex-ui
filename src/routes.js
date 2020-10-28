@@ -5,6 +5,7 @@ import React from 'react';
 import BalancesPage from './pages/BalancesPage';
 import BasicLayout from './components/BasicLayout';
 import MainPage from './pages/MainPage';
+import SolongPage from './pages/SolongPage';
 
 export function Routes() {
   return (
@@ -14,6 +15,7 @@ export function Routes() {
       <Route exact path="/trade" component={TradePageContents} />
       <Route exact path="/orders" component={OpenOrdersPageContents} />
       <Route exact path="/balances" component={BalancesPageContents} />
+      <Route exact path="/solong" component={ExtPageContents} />
     </HashRouter>
   );
 }
@@ -46,6 +48,14 @@ function MainPageContents() {
   return (
     <BasicLayout>
       <MainPage />
+    </BasicLayout>
+  );
+}
+
+function ExtPageContents() {
+  return (
+    <BasicLayout>
+      <SolongPage />
     </BasicLayout>
   );
 }
