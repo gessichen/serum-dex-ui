@@ -11,6 +11,7 @@ export class SolongHelper {
     console.log('SolongHelper');
     this.onSelected = null;
     this._publicKey = null;
+    this._onProcess = false;
 
     this.selectAccount = this.selectAccount.bind(this);
   }
@@ -25,6 +26,10 @@ export class SolongHelper {
 
   selectAccount() {
     console.log('solong helper select account');
+    if (this._onProcess) {
+      return;
+    }
+    this._onProcess = true;
     window.solong
       .selectAccount()
       .then((account) => {
@@ -40,7 +45,10 @@ export class SolongHelper {
           this.onSelected(account);
         }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        this._onProcess = false;
+      });
   }
 }
 
