@@ -16,6 +16,10 @@ import { EndpointInfo } from '../utils/types';
 import { notify } from '../utils/notifications';
 import { Connection } from '@solana/web3.js';
 import WalletConnect from './WalletConnect';
+import { LocaleContext } from '../locContext';
+import { LAUGUANGES_PROVIDERS } from '../utils/lang';
+import { FormattedMessage } from "react-intl";
+import { messages } from '../utils/lang';
 
 const Wrapper = styled.div`
   background-color: #0d1017;
@@ -61,6 +65,9 @@ export default function TopBar() {
   const [testingConnection, setTestingConnection] = useState(false);
   const location = useLocation();
   const history = useHistory();
+
+  //@ts-ignore
+  const [locale, setLocale] = React.useContext(LocaleContext);
 
   const handleClick = useCallback(
     (e) => {
@@ -124,6 +131,12 @@ export default function TopBar() {
     return () => window.removeEventListener('beforeunload', handler);
   }, [endpointInfoCustom, setEndpoint]);
 
+  const selectLang = (lang) => {
+    //@ts-ignore
+    setLocale(lang);
+    localStorage.setItem('locale', lang);
+  };
+
   return (
     <>
       <CustomClusterEndpointDialog
@@ -149,22 +162,22 @@ export default function TopBar() {
             flex: 1,
           }}
         >
-          <Menu.Item key="/">TRADE</Menu.Item>
+          <Menu.Item key="/"><FormattedMessage {...messages.trade}/></Menu.Item>
           <Menu.Item key="/swap">
             <a
               href={EXTERNAL_LINKS['/swap']}
               target="_blank"
               rel="noopener noreferrer"
             >
-              SWAP
+              <FormattedMessage {...messages.swap}/>
             </a>
           </Menu.Item>
           {connected && <Menu.Item key="/balances">BALANCES</Menu.Item>}
           {connected && <Menu.Item key="/orders">ORDERS</Menu.Item>}
           {connected && <Menu.Item key="/convert">CONVERT</Menu.Item>}
-          <Menu.Item key="/list-new-market">ADD MARKET</Menu.Item>
+          <Menu.Item key="/list-new-market"><FormattedMessage {...messages.addMarket}/></Menu.Item>
           <Menu.SubMenu
-            title="LEARN"
+            title={<FormattedMessage {...messages.learn}/>}
             onTitleClick={() => window.open(EXTERNAL_LINKS['/learn'], '_blank')}
           >
             <Menu.Item key="/add-market">
@@ -173,7 +186,7 @@ export default function TopBar() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Adding a market
+                <FormattedMessage {...messages.addMarket}/>
               </a>
             </Menu.Item>
             <Menu.Item key="/wallet-support">
@@ -276,10 +289,19 @@ export default function TopBar() {
           </div>
         )}
         <div>
-          <Select onSelect={setProvider} value={providerUrl}>
+          <Select onSelect={setProvider} value={providerUrl} style={{ marginRight: 8 }}>
             {WALLET_PROVIDERS.map(({ name, url }) => (
               <Select.Option value={url} key={url}>
                 {name}
+              </Select.Option>
+            ))}
+          </Select>
+        </div>
+        <div>
+          <Select onSelect={selectLang} value={locale}>
+            {LAUGUANGES_PROVIDERS.map(({ loc, label }) => (
+              <Select.Option value={loc} key={loc}>
+                {label}
               </Select.Option>
             ))}
           </Select>

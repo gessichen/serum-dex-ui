@@ -18,6 +18,8 @@ import { useSendConnection } from '../utils/connection';
 import { notify } from '../utils/notifications';
 import { Balances } from '../utils/types';
 import StandaloneTokenAccountsSelect from './StandaloneTokenAccountSelect';
+import { FormattedMessage } from "react-intl";
+import { messages } from '../utils/lang';
 
 const RowBox = styled(Row)`
   padding-bottom: 20px;
@@ -143,7 +145,7 @@ export default function StandaloneBalancesDisplay() {
               justify="space-between"
               style={{ paddingBottom: 12 }}
             >
-              <Col>Wallet balance:</Col>
+              <Col><FormattedMessage {...messages.walletBalance} />:</Col>
               <Col>{balances && balances.wallet}</Col>
             </RowBox>
             <RowBox
@@ -151,7 +153,7 @@ export default function StandaloneBalancesDisplay() {
               justify="space-between"
               style={{ paddingBottom: 12 }}
             >
-              <Col>Unsettled balance:</Col>
+              <Col><FormattedMessage {...messages.unsettledBalance} />:</Col>
               <Col>{balances && balances.unsettled}</Col>
             </RowBox>
             <RowBox align="middle" justify="space-around">
@@ -161,12 +163,12 @@ export default function StandaloneBalancesDisplay() {
                   size="large"
                   onClick={() => setBaseOrQuote(baseOrQuote)}
                 >
-                  Deposit
+                  <FormattedMessage {...messages.deposit} />
                 </ActionButton>
               </Col>
               <Col style={{ width: 150 }}>
                 <ActionButton block size="large" onClick={onSettleFunds}>
-                  Settle
+                  <FormattedMessage {...messages.settle} />
                 </ActionButton>
               </Col>
             </RowBox>

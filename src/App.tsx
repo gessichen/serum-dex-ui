@@ -8,8 +8,34 @@ import { Spin } from 'antd';
 import ErrorBoundary from './components/ErrorBoundary';
 import { Routes } from './routes';
 import { PreferencesProvider } from './utils/preferences';
+import { IntlProvider } from 'react-intl';
+import { LocaleContext } from './locContext';
+var en = require('./translations/en');
+var zh = require('./translations/zh');
+var ko = require('./translations/ko');
+var jp = require('./translations/jp');
+var vi = require('./translations/vi');
+var tr = require('./translations/tr');
+var ru = require('./translations/ru');
+var zhhk = require('./translations/zhhk');
+
+const messages = {
+  en,
+  'zh-CN': zh,
+  ko,
+  jp,
+  vi,
+  tr,
+  ru,
+  'zh-HK': zhhk,
+};
+
 
 export default function App() {
+
+  //@ts-ignore
+  const [locale] = React.useContext(LocaleContext);
+
   return (
     <Suspense fallback={() => <Spin size="large" />}>
       <GlobalStyle />
@@ -18,9 +44,11 @@ export default function App() {
           <MarketProvider>
             <WalletProvider>
               <PreferencesProvider>
-                <Suspense fallback={() => <Spin size="large" />}>
-                  <Routes />
-                </Suspense>
+                <IntlProvider locale={locale} messages={messages[locale]}>
+                  <Suspense fallback={() => <Spin size="large" />}>
+                    <Routes />
+                  </Suspense>
+                </IntlProvider>
               </PreferencesProvider>
             </WalletProvider>
           </MarketProvider>

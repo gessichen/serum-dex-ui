@@ -21,6 +21,8 @@ import { useSendConnection } from '../utils/connection';
 import FloatingElement from './layout/FloatingElement';
 import { placeOrder } from '../utils/send';
 import { SwitchChangeEventHandler } from 'antd/es/switch';
+import { FormattedMessage } from "react-intl";
+import { messages } from '../utils/lang';
 
 const SellButton = styled(Button)`
   margin: 20px 0px 0px 0px;
@@ -257,7 +259,7 @@ export default function TradeForm({
               borderColor: side === 'buy' ? '#02bf76' : '',
             }}
           >
-            BUY
+            <FormattedMessage {...messages.buy} />
           </Radio.Button>
           <Radio.Button
             value="sell"
@@ -268,12 +270,12 @@ export default function TradeForm({
               borderColor: side === 'sell' ? '#F23B69' : '',
             }}
           >
-            SELL
+            <FormattedMessage {...messages.sell} />
           </Radio.Button>
         </Radio.Group>
         <Input
           style={{ textAlign: 'right', paddingBottom: 8 }}
-          addonBefore={<div style={{ width: '30px' }}>Price</div>}
+          addonBefore={<div style={{ width: '30px' }}> <FormattedMessage {...messages.price} /></div>}
           suffix={
             <span style={{ fontSize: 10, opacity: 0.5 }}>{quoteCurrency}</span>
           }
@@ -285,7 +287,9 @@ export default function TradeForm({
         <Input.Group compact style={{ paddingBottom: 8 }}>
           <Input
             style={{ width: 'calc(50% + 30px)', textAlign: 'right' }}
-            addonBefore={<div style={{ width: '30px' }}>Size</div>}
+            addonBefore={<div style={{ width: '30px' }}>
+               <FormattedMessage {...messages.size} />
+            </div>}
             suffix={
               <span style={{ fontSize: 10, opacity: 0.5 }}>{baseCurrency}</span>
             }
@@ -333,7 +337,7 @@ export default function TradeForm({
           size="large"
           loading={submitting}
         >
-          Buy {baseCurrency}
+          <FormattedMessage {...messages.buy} /> {baseCurrency}
         </BuyButton>
       ) : (
         <SellButton
@@ -344,7 +348,7 @@ export default function TradeForm({
           size="large"
           loading={submitting}
         >
-          Sell {baseCurrency}
+          <FormattedMessage {...messages.sell} /> {baseCurrency}
         </SellButton>
       )}
     </FloatingElement>

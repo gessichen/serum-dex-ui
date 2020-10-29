@@ -7,6 +7,8 @@ import { useInterval } from '../utils/useInterval';
 import FloatingElement from './layout/FloatingElement';
 import usePrevious from '../utils/usePrevious';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import { FormattedMessage } from 'react-intl';
+import { messages } from '../utils/lang';
 
 const Title = styled.div`
   color: rgba(255, 255, 255, 1);
@@ -111,13 +113,15 @@ export default function Orderbook({ smallScreen, depth = 7, onPrice, onSize }) {
         smallScreen ? { flex: 1 } : { height: '500px', overflow: 'hidden' }
       }
     >
-      <Title>Orderbook</Title>
+      <Title>
+        <FormattedMessage {...messages.orderBook} />
+      </Title>
       <SizeTitle>
         <Col span={12} style={{ textAlign: 'left' }}>
-          Size ({baseCurrency})
+          <FormattedMessage {...messages.size} /> ({baseCurrency})
         </Col>
         <Col span={12} style={{ textAlign: 'right' }}>
-          Price ({quoteCurrency})
+          <FormattedMessage {...messages.price} /> ({quoteCurrency})
         </Col>
       </SizeTitle>
       {orderbookData?.asks.map(({ price, size, sizePercent }) => (

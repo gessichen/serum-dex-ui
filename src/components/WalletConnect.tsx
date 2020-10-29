@@ -3,6 +3,8 @@ import { Button, Popover } from 'antd';
 import { InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
 import { useWallet } from '../utils/wallet';
 import LinkAddress from './LinkAddress';
+import { FormattedMessage } from "react-intl";
+import { messages } from '../utils/lang';
 
 export default function WalletConnect() {
   const { connected, wallet } = useWallet();
@@ -17,7 +19,7 @@ export default function WalletConnect() {
         style={{ color: '#2abdd2' }}
       >
         <UserOutlined />
-        {!connected ? 'Connect wallet' : 'Disconnect'}
+        {!connected ? <FormattedMessage {...messages.connect} /> : <FormattedMessage {...messages.disConnect} /> }
       </Button>
       {connected && (
         <Popover

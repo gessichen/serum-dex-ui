@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { LocaleContextProvider } from './locContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LocaleContextProvider>
+      <App />
+    </LocaleContextProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

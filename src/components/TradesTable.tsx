@@ -5,6 +5,8 @@ import { useMarket, useBonfidaTrades } from '../utils/markets';
 import { getDecimalCount } from '../utils/utils';
 import FloatingElement from './layout/FloatingElement';
 import { BonfidaTrade } from '../utils/types';
+import { FormattedMessage } from "react-intl";
+import { messages } from '../utils/lang';
 
 const Title = styled.div`
   color: rgba(255, 255, 255, 1);
@@ -30,11 +32,11 @@ export default function PublicTrades({ smallScreen }) {
             }
       }
     >
-      <Title>Recent Market trades</Title>
+      <Title><FormattedMessage {...messages.trade} /> </Title>
       <SizeTitle>
-        <Col span={8}>Price ({quoteCurrency}) </Col>
+        <Col span={8}><FormattedMessage {...messages.price} />  ({quoteCurrency}) </Col>
         <Col span={8} style={{ textAlign: 'right' }}>
-          Size ({baseCurrency})
+          <FormattedMessage {...messages.size} />  ({baseCurrency})
         </Col>
         <Col span={8} style={{ textAlign: 'right' }}>
           Time
